@@ -22,6 +22,13 @@ body {
 	height: 100vh;
 }
 
+.card-items {
+	width: 100%;
+	max-width: 600px;
+	min-height: 400px;
+	perspective: 1000px;
+}
+
 .card-block {
 	display: flex;
 	justify-content: space-between;
@@ -33,7 +40,8 @@ body {
 	overflow: hidden;
 }
 
-.card-block::after, .card-block::before {
+.card-front::after,
+.card-front::before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -43,13 +51,13 @@ body {
 	left: 0;
 	background: url('./img/bg-after.png') no-repeat center;
 	background-size: cover;
-	z-index: 0;
+	z-index: 3;
 }
 
-.card-block::before {
+.card-front::before {
 	background: url('./img/bg.png');
 	background-size: cover;
-	z-index: -1;
+	z-index: 2;
 }
 
 .card-block__title {
@@ -61,14 +69,14 @@ body {
 	font-size: 82px;
 	font-weight: 400;
 	letter-spacing: 4.1px;
-	z-index: 1;
+	z-index: 4;
 	position: relative;
 	padding: 0 0 0 30px;
 	text-transform: uppercase;
 }
 
 .card-block__img {
-	z-index: 2;
+	z-index: 5;
 	position: absolute;
 	bottom: -20px;
 	right: -140px;
@@ -95,14 +103,43 @@ body {
 	left: 33px;
 }
 
+.card-front, .card-back {
+	position: absolute;
+	transition: 1s;
+	backface-visibility: hidden;
+}
+
+.card-front {
+	z-index: 1;
+}
+
+.card-back {
+	background: #ffffff;
+	z-index: 6;
+	transform: rotateY(180deg);
+}
+
+.card-items:hover .card-front {
+	transform: rotateY(180deg);
+}
+
+.card-items:hover .card-back {
+	transform: rotateY(360deg);
+}
+
+
 @media screen and (max-width: 768px) {
-	.card-block {
-		min-height: 100vh;
-	}
 	.card-block__title {
 		max-width: 75%;
 	}
 }
+
+@media screen and (max-height: 450px) {
+	.card-block {
+		min-height: 100vh;
+	}
+}
+
 @media screen and (max-width: 425px) {
 	.card-block__title {
 		font-size: 50px;
