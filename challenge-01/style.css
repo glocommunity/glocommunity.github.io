@@ -28,14 +28,12 @@ body {
 	width: 100%;
 	max-width: 600px;
 	min-height: 400px;
-	background: url('./img/bg.png');
-	background-size: cover;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.38);
 	position: relative;
 	overflow: hidden;
 }
 
-.card-block::after {
+.card-block::after, .card-block::before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -46,6 +44,12 @@ body {
 	background: url('./img/bg-after.png') no-repeat center;
 	background-size: cover;
 	z-index: 0;
+}
+
+.card-block::before {
+	background: url('./img/bg.png');
+	background-size: cover;
+	z-index: -1;
 }
 
 .card-block__title {
@@ -91,7 +95,14 @@ body {
 	left: 33px;
 }
 
-
+@media screen and (max-width: 768px) {
+	.card-block {
+		min-height: 100vh;
+	}
+	.card-block__title {
+		max-width: 75%;
+	}
+}
 @media screen and (max-width: 425px) {
 	.card-block__title {
 		font-size: 50px;
